@@ -11,10 +11,10 @@ session_start(); ?>
     // Si $_Session est set
     //Ne rien faire ->redirection ../index.php (la personne n'as rien à faire là)
     //Sinon
-    // si POST set
+    // si POST login set
     //requête de login avec check BDD
     //stockage variable
-    //sinon
+    //sinon c'est POST signup qui est SET
     //Proposé connexion
     //Ou
     //Proposé inscription

@@ -1,5 +1,5 @@
 <?php
-	//titreLivre, categorieLivre, descriptionLivre, auteurLivre, imgLivre, etatLivre, reEditionLivre, stockLivre, prixNeufLivre, prixOccasionLivre, codeBarreLivre, ISBN
+	//Affichage avec IMG
 		require 'connect.php';
 			$query = $pdo->query("SELECT * FROM livres");
 			while ($donnees = $query->fetch())

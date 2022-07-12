@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 12 juil. 2022 à 07:56
+-- Généré le : mar. 12 juil. 2022 à 07:54
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `librairie`
+-- Base de données : `librairie-testing`
 --
-CREATE DATABASE IF NOT EXISTS `librairie` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `librairie`;
+CREATE DATABASE IF NOT EXISTS `librairie-testing` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `librairie-testing`;
 
 -- --------------------------------------------------------
 
