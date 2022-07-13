@@ -27,10 +27,13 @@ include "include/head.php";
    else{ echo "<h1>Bienvenue</h1>";
    }?> </h1>
   <div class="text-center mt-4 name ">
+    
+    
+    <!-- Modification -->
+    <?php //include ("include/ajoutMoi.php"); ?>
+    <?php include ("include/modifieMoi.php"); ?>
     <!-- Affichage de la table livre -->
     <?php include ("include/show.php"); ?>
-    <!-- Modification -->
-    <?php include ("include/ajoutMoi.php"); ?>
   </div>
 
   </div>

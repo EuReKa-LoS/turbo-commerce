@@ -1,7 +1,7 @@
 <?php //Double formulaire de selection
 //Table: livres
 //idLivre, titreLivre, categorieLivre, descriptionLivre, auteurLivre, imgLivre, etatLivre, reEditionLivre, stockLivre, prixNeufLivre, prixOccasionLivre, codeBarreLivre, ISBN
-$fileForm = "index.php";
+$fileForm = "ajoutMoi.php";
 $headerForm = "<h1>Ajout d'un livre</h1>";
 /*
 Idea update
@@ -9,7 +9,7 @@ if etat OR reedition
 */
 if (isset($_POST['idLivre'])) //Si une id est selectionner+valider alors modifier_article
 {
-    $fileForm = "index.php";
+    $fileForm = "modifieMoi.php";
     $headerForm = "<h1>Modification d'un livre</h1>";
 }
 
@@ -21,7 +21,7 @@ if (isset($_POST['idLivre'])) //Si une id est selectionner+valider alors modifie
         if (isset($_POST['idLivre'])) //Formulaire de modification si l'id à été selectionner
         {
             try {
-                require 'SQL/connectionBDD.php';
+                require '../SQL/connectionBDD.php';
 
                 $req = $bdd->prepare('SELECT * FROM livres WHERE idLivre = ?');
                 $req->execute(array($_POST['idLivre']));
@@ -30,49 +30,24 @@ if (isset($_POST['idLivre'])) //Si une id est selectionner+valider alors modifie
                     //Une idlivre est selectionner je remplis mon tableau avec les datas associer
         ?>
                     <input type="hidden" name="idLivre" value="<?php echo $_POST['idLivre'] ?>" /></li>
-                    
-                    <li><label for="titreLivre">Titre du livre: </label><input type="text" id="titreLivre" name="titreLivre" value="<?php echo $donnees['titreLivre']; ?>"/></li>
-                    <li><label for="categorieLivre">Categorie du livre: </label><input type="text" id="categorieLivre" name="categorieLivre" value="<?php echo $donnees['categorieLivre']; ?>"/></li>
-                    <li><label for="descriptionLivre">Description du livre: </label><input type="textare" id="descriptionLivre" name="descriptionLivre" value="<?php echo $donnees['descriptionLivre']; ?>"/></li>
-                    <li><label for="auteurLivre"></label>Auteur du livre: <input type="text" id="auteurLivre" name="auteurLivre" value="<?php echo $donnees['auteurLivre']; ?>"/></li>
-                    <!-- Gestion file -->
-                    <li><label for="imgLivre">Jaquette du livre: </label> : <input type="file" id="imgLivre" name="imgLivre" value="<?php echo $donnees['imgLivre']; ?>"/></li>
-                    <!-- Fin gestion file -->
-                    <!-- Valeur par défaut de la checkbox etatLivre=0 si vide -->
-                    <?php
-                    if ($donnees['imgLivre']==1)
-                    {
-                        echo"
-                        <li><label for='etatLivre'>Etat du livre: </label><input type='checkbox' id='etatLivre' name='etatLivre' checked></li>
-                        ";
-                    }
-                    else{
-                        echo "
-                        <li><label for='etatLivre'>Etat du livre: </label><input type='checkbox' id='etatLivre' name='etatLivre' />
-                        ";
-                    }
-                    if ($donnees['imgLivre']==1)
-                    {
-                        echo"
-                        <li><label for='reEditionLivre'>Réédition du livre: </label>Etat du livre: <input type='checkbox' id='reEditionLivre' name='reEditionLivre' checked></li>
-                        ";
-                    }
-                    else{
-                        echo "
-                        <li><label for='reEditionLivre'>Réédition du livre: </label>Etat du livre: <input type='checkbox' id='reEditionLivre' name='reEditionLivre' />
-                        ";
-                    }?>
-                    <li><label for="stockLivre"></label>Stock du livre: <input type="text" id="stockLivre" name="stockLivre" value="<?php echo $donnees['stockLivre']; ?>"/></li>
+                    <li><label for="titreLivre">Titre du livre: </label> : <input type="text" id="titreLivre" name="titreLivre" value="<?php echo $donnees['titreLivre']; ?>"></li>
+                    <li><label for="categorieLivre">Categorie du livre: </label> : <input type="text" id="categorieLivre" name="categorieLivre" value="<?php echo $donnees['categorieLivre']; ?>"></li>
+                    <li><label for="descriptionLivre">Description du livre:</label> : <input type="text" id="descriptionLivre" name="descriptionLivre" value="<?php echo $donnees['descriptionLivre']; ?>"></li>
+                    <li><label for="auteurLivre"></label>Auteur du livre: <input type="text" id="auteurLivre" name="auteurLivre" value="<?php echo $donnees['auteurLivre']; ?>"></li>
+                    <li><label for="imgLivre">Jaquette du livre: </label> : <input type="file" id="imgLivre" name="imgLivre" value="<?php echo $donnees['imgLivre']; ?>"></li>
+                    <li><label for="etatLivre">Etat du livre: </label> : <input type="text" id="etatLivre" name="etatLivre" value="<?php echo $donnees['etatLivre']; ?>"></li>
+                    <li><label for="reEditionLivre">Réédition: </label> : <input type="text" id="reEditionLivre" name="reEditionLivre" value="<?php echo $donnees['reEditionLivre']; ?>"></li>
+                    <li><label for="stockLivre">Stock: </label> : <input type="text" id="stockLivre" name="stockLivre" value="<?php echo $donnees['stockLivre']; ?>"></li>
                     <li><label for="prixNeufLivre">Prix neuf: </label> : <input type="text" id="prixNeufLivre" name="prixNeufLivre" value="<?php echo $donnees['prixNeufLivre']; ?>"></li>
-                    <li><label for="prixOccasionLivre">Prix Occasion: </label> : <input type="text" id="prixOccasionLivre" name="prixOccasionLivre" /></li>
-                    
-                    
+                    <li><label for="prixOccasionLivre">Prix Occasion: </label> : <input type="text" id="prixOccasionLivre" name="prixOccasionLivre" value="<?php echo $donnees['prixOccasionLivre']; ?>"></li>
+                    <li><label for="codeBarreLivre">Code Barre: </label> : <input type="text" id="codeBarreLivre" name="codeBarreLivre" value="<?php echo $donnees['codeBarreLivre']; ?>"></li>
+                    <li><label for="ISBN">ISBM: </label> : <input type="text" id="ISBN" name="ISBN" value="<?php echo $donnees['ISBN']; ?>"></li>
     </ul>
-    <input type="submit" name="Updating" value="Mettre à jour" />
+    <input type="submit"  value="Mettre à jour" />
 </form>
-<form method="post" action="index.php">
+<form method="post" action="deleteMoi.php">
     <input type="hidden" name="idLivre" value="<?php echo $_POST['idLivre'] ?>" /></li>
-    <input type="submit" name="Deleting" value="Supprimer" />
+    <input type="submit" value="Supprimer" />
 <?php
                 } //while
 
@@ -80,20 +55,17 @@ if (isset($_POST['idLivre'])) //Si une id est selectionner+valider alors modifie
             } catch (Exception $e) {
                 die('Erreur : ' . $e->getMessage());
             }
-} //if
-else
-{
-include ("include/ajoutMoi.php");
-/*
-HTML ici
+        } //if
+        else {
+?>
 <li><label for="titreLivre">Titre du livre: </label> : <input type="text" id="titreLivre" name="titreLivre">
 <li><label for="categorieLivre">Categorie du livre: </label> : <input type="text" id="categorieLivre" name="categorieLivre">
 <li><label for="descriptionLivre">Description du livre:</label> : <input type="text" id="descriptionLivre" name="descriptionLivre">
 <li><label for="auteurLivre"></label>Auteur du livre: <input type="text" id="auteurLivre" name="auteurLivre">
 <li><label for="imgLivre">Jaquette du livre: </label> : <input type="file" id="imgLivre" name="imgLivre">
-    <!--<li><label for="etatLivre">Etat du livre: </label> : <input type="text" id="etatLivre" name="etatLivre">-->
+<!--<li><label for="etatLivre">Etat du livre: </label> : <input type="text" id="etatLivre" name="etatLivre">-->
 <li><label for="etatLivre">Etat du livre: </label> : <input type="checkbox" id="etatLivre" name="etatLivre" value="1" />
-    <!--<li><label for="reEditionLivre">Réédition: </label> : <input type="text" id="reEditionLivre" name="reEditionLivre">-->
+<!--<li><label for="reEditionLivre">Réédition: </label> : <input type="text" id="reEditionLivre" name="reEditionLivre">-->
 <li><label for="reEditionLivre">Réédition: </label> : <input type="checkbox" id="reEditionLivre" name="reEditionLivre" value="1" />
 
 <li><label for="stockLivre">Stock: </label> : <input type="text" id="stockLivre" name="stockLivre">
@@ -101,18 +73,17 @@ HTML ici
 <li><label for="prixOccasionLivre">Prix Occasion: </label> : <input type="text" id="prixOccasionLivre">
 <li><label for="codeBarreLivre">Code Barre: </label> : <input type="text" id="codeBarreLivre" name="codeBarreLivre">
 <li><label for="ISBN">ISBM: </label> : <input type="text" id="ISBN" name="ISBN">
-    </ul>
-    <input type="submit" name="books" value="Ajouter" /><input type="reset" value="Effacer" />
+</ul>
+<input type="submit" name="books" value="Ajouter" /><input type="reset" value="Effacer" />
 </form>
- */
-
+<?php
 
             try {
-                require 'SQL/connectionBDD.php';
+                require '../SQL/connectionBDD.php';
 
                 $reponse = $bdd->query('SELECT idLivre, titreLivre FROM livres');
 ?>
-    <form method="post" action="index.php">
+    <form method="post" action="modifieMoi.php">
         <p>
             <label for="idLivre">
                 <h1>
@@ -151,10 +122,7 @@ HTML ici
 
 
 <?php
-if (isset($_POST['Updating'])) {
-echo "Couack !";
-    /*
-
+if (isset($_POST['diego'])) {
     try {
         if (isset($_FILES['imgLivre'])) {
             $tmpName = $_FILES['imgLivre']['tmp_name'];
@@ -204,7 +172,7 @@ echo "Couack !";
         }
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
-    }*/
+    }
 }
 
 /*
@@ -228,20 +196,6 @@ Ceci est du HTML
 <form method="post" action="login.php">
 </form>
 */
-    try
-	{
-		require'SQL/connectionBDD.php';
-		if(!empty($_POST['Deleting']))
-		{
-            $idLivre = intval($_POST['idLivre']);
-            $req = $bdd->prepare("DELETE FROM livres where idLivre='$idLivre'");
-			$req->execute();
-            header("Refresh:0; url=index.php");
-        }
-        }
-	    catch(Exception $e)
-	    {
-		die('Erreur : ' . $e -> getMessage());
-	    }
+
 
 ?>
