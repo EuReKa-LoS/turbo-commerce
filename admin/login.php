@@ -38,7 +38,7 @@ session_start(); ?>
             else{
             //J'ai besoin de la Base de Donnée
             require $config_bdd;
-            $stmt = $bdd->prepare("SELECT * FROM customers WHERE email = ?");
+            $stmt = $bdd->prepare("SELECT * FROM users WHERE email = ?");
             $email_users_post=[$_POST['email_users']];
             $stmt->execute([$_POST['email_users']]);
             $user = $stmt->fetch();//fetchAll(PDO::FETCH_ASSOC);//
@@ -51,7 +51,7 @@ session_start(); ?>
                     $_SESSION['nom']=$user['last_name'];
                     echo $_SESSION['prenom'];
                     echo $_SESSION['nom'];
-                    header("location:../index.php");
+                    header("location:dashboard.php");
                 } else {
                     echo "Identifiants  Inwalid";
                 }
@@ -66,13 +66,23 @@ session_start(); ?>
                 //Vérification complexité mot de passe
                 //WIP
                 //Insertion des infos clients
-                $req = $bdd->prepare('INSERT INTO customers (first_name , last_name, email, password, gender ) VALUES (:first_name, :last_name, :email, :password_hash, :gender)');
+                /*
+                first_name
+                last_name
+                email
+                password
+                gender
+                address
+                role 
+                 */
+                $req = $bdd->prepare('INSERT INTO users (first_name , last_name, email, password, gender, role ) VALUES (:first_name, :last_name, :email, :password_hash, :gender, :role)');
                 $data = [
                     'first_name' => $_POST['signup_first_name'],
                     'last_name' => $_POST['signup_last_name'],
                     'email' => $_POST['signup_email_users'],
                     'gender' => $_POST['signup_gender'],
                     'password_hash' => $password_hash,
+                    'role'=> 0
                 ];
                 $req->execute($data);
                 header("location:login.php");
@@ -107,6 +117,14 @@ session_start(); ?>
                 <li><label for="signup_last_name">Nom: </label> : <input type="text" id="signup_last_name" name="signup_last_name"></li>
                 <li><label for="signup_email_users">Email: </label> : <input type="text" id="signup_email_users" name="signup_email_users"></li>
                 <li><label for="signup_gender ">Sexe: </label> : <input type="text" id="signup_gender " name="signup_gender"></li>
+                <?php /*
+                Masculin
+                Féminin
+                Trans* masculin / Homme trans*
+                Trans* féminine / Femme trans*
+                Genderqueer
+                Je refuse de répondre
+                */ ?>
                 <li><label for="signup_password_users">Mot de passe: </label> : <input type="password" id="signup_password_users" name="signup_password_users"></li>
                 <li><label for="signup_confirm_password_users">Confirmer le mot de passe: </label> : <input type="password" id="confirm_password_users" name="confirm_password_users"></li>
                 <input type="submit" name="signup" value="Inscription" /><input type="reset" value="Effacer"/>

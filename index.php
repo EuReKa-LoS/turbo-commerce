@@ -20,20 +20,25 @@ include "include/head.php";
 
     </div>
   </nav>
-<?php if(isset($_SESSION['prenom'])){
+
+
+<?php
+//Fonction message d'accueil
+//Si l'utilisateur est connecté ca affiche "Bonjour et prénom" de l'utilisateur
+if(isset($_SESSION['prenom'])){
    echo "<h1>Bonjour ".$_SESSION['prenom']."</h1>";
    echo "<li><a href='admin/logout.php'>Déconnexion</a></li>";
    }
+   //Sinon on affiche juste Bienvenue
    else{ echo "<h1>Bienvenue</h1>";
-   }?> </h1>
+   }?>
   <div class="text-center mt-4 name ">
-    
-    
-    <!-- Modification -->
     <?php //include ("include/ajoutMoi.php"); ?>
-    <?php include ("include/modifieMoi.php"); ?>
+    <?php // include ("Testing-backup/ajoutMoiForeignKey.php"); ?>
     <!-- Affichage de la table livre -->
-    <?php include ("include/show.php"); ?>
+    <?php include ("Testing-backup/modifieMoiForeignKey.php"); ?>
+    <?php //include ("include/recherche.php"); ?>
+    <?php //include ("include/show.php"); ?>
   </div>
 
   </div>

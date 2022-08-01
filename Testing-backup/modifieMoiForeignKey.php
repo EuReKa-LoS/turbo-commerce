@@ -126,7 +126,7 @@ if (isset($_POST['Updating']) AND (isset($_POST['idLivre']))) {
     {
         echo "Updating est set mais pas IMG</br>";
         echo "SI l'image est pas set on la garde</br>";
-                $req = $pdo->prepare("UPDATE livres SET titreLivre='$titreLivre' , categorieLivre='$categorieLivre' , descriptionLivre='$descriptionLivre' , auteurLivre='$auteurLivre' , stockLivre='$stockLivre' , prixLivre='$prixLivre' , codeBarreLivre='$codeBarreLivre', ISBN='$ISBN' WHERE idLivre='$idLivre'"); //
+                $req = $pdo->prepare("UPDATE livres SET titreLivre='$titreLivre' , categorieLivre='$categorieLivre' , descriptionLivre='$descriptionLivre' , auteurLivre='$auteurLivre' , stockLivre='$stockLivre' , prixLivre='$prixLivre' , codeBarreLivre='$codeBarreLivre', ISBN='$ISBN' , date=now() WHERE idLivre='$idLivre'"); //
                 $req->execute();
     }
     else

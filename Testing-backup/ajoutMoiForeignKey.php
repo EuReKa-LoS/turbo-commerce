@@ -1,4 +1,7 @@
+
 <?php
+include ('lib/databases.php');
+include ('lib/categories.php');
 if (isset($_POST['books'])) {
     try {
         if (isset($_FILES['imgLivre'])) {
@@ -66,12 +69,22 @@ if (isset($_POST['books'])) {
     }
 }
 ?>
+<?php //Catégorie
+require 'connect.php';
+$categories = get_all_categories();
+?>
 <!-- Formulaire ajout du livre -->
 <h1>Ajout de livre</h1>
 <table class="table-books">
     <form method="post" action="index.php" class="form-books" enctype="multipart/form-data">
         <li><label for="titreLivre">Titre du livre: </label><input type="text" id="titreLivre" name="titreLivre" required="" ></li>
-        <li><label for="categorieLivre">Categorie du livre: </label><input type="text" id="categorieLivre" name="categorieLivre" required=""></li>
+        <!-- </label><input type="text" id="categorieLivre" name="categorieLivre" required=""></li> -->
+        <li><label for="categorieLivre">Categorie du livre: </label>
+        <select name="categorieLivre" id="categorieLivre">
+            <?php foreach ($categories as $category): ?>
+                <option value="<?php echo $category->id ?>"><?= $category->nameCategorie ?></option>
+            <?php endforeach ?>
+        </select>
         <li><label for="descriptionLivre">Description du livre: </label><textarea id="descriptionLivre" name="descriptionLivre" rows="10px" cols="50px"></textarea></li>
         <li><label for="auteurLivre"></label>Auteur du livre: <input type="text" id="auteurLivre" name="auteurLivre" required=""></li>
         <!-- Gestion file -->
