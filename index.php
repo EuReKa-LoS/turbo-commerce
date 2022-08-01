@@ -33,12 +33,13 @@ if(isset($_SESSION['prenom'])){
    else{ echo "<h1>Bienvenue</h1>";
    }?>
   <div class="text-center mt-4 name ">
-    <?php //include ("include/ajoutMoi.php"); ?>
+    <?php include ("include/ajoutMoi.php"); ?>
     <?php // include ("Testing-backup/ajoutMoiForeignKey.php"); ?>
     <!-- Affichage de la table livre -->
-    <?php include ("Testing-backup/modifieMoiForeignKey.php"); ?>
+    <?php //include ("Testing-backup/modifieMoiForeignKey.php"); ?>
     <?php //include ("include/recherche.php"); ?>
     <?php //include ("include/show.php"); ?>
+    <a href="Testing-backup/index.php">Zone de test</a>
   </div>
 
   </div>
