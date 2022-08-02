@@ -1,3 +1,7 @@
+<?php
+$num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']):0;
+$num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
+?>
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -10,7 +14,19 @@
 					</ul>
 					<ul class="header-links pull-right">
 						<!-- <li><a href="#"><i class="fa fa-dollar"></i> Inscription</a></li> -->
-						<li><a href="#"><i class="fa fa-user-o"></i> Mon compte</a></li>
+                        <?php 
+                        //si session active affiché mon compte sinon connexion
+                        if(!empty($_SESSION))
+                        {
+                          echo "<li><a href='admin/login.php'><i class='fa fa-user-o'></i> Mon compte</a></li>";
+                        }
+                        else
+                        {
+                          echo "<li><a href='admin/login.php'><i class='fa fa-user-o'></i> Connexion</a></li>";
+                        }
+
+                        ?>
+						
 					</ul>
 				</div>
 			</div>
@@ -60,7 +76,8 @@
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
 										<span>Favoris</span>
-										<div class="qty">2</div>
+										
+										<div class="qty"><?= $num_fav?></div>
 									</a>
 								</div>
 								<!-- /Wishlist -->
@@ -70,7 +87,7 @@
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Panier</span>
-										<div class="qty">3</div>
+										<div class="qty"><?= $num_items_in_cart?></div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
@@ -101,8 +118,8 @@
 											<h5>TOTAL DU PANIER : 2940.00 €</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">Voir le panier</a>
-											<a href="#">Valider  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="cart.php">Voir le panier</a>
+											<a href="checkout.php">Valider  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>

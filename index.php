@@ -1,9 +1,7 @@
 <?php session_start();
 // Varaible pour le menu Hot Deal
 $hotdeal=false;
-if (isset($_SESSION["email"])) {
-echo $_SESSION["email"];
-}
+$newsletter=false;
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,7 +11,9 @@ $path="styles.css";
 include "include/head.php";
 ?>
 <body>
+<!-- HEADER -->
 <?php include 'include/header.php' ?>
+<!-- /HEADER -->
 
 		<!-- NAVIGATION -->
 		<nav id="navigation">
@@ -22,15 +22,7 @@ include "include/head.php";
 				<!-- responsive-nav -->
 				<div id="responsive-nav">
 					<!-- NAV -->
-					<!-- <ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
-					</ul> -->
+					<?php include  'include/navbar.php' ?>
 					<!-- /NAV -->
 				</div>
 				<!-- /responsive-nav -->
@@ -46,17 +38,7 @@ include "include/head.php";
 				<!-- row -->
 				<div class="row">
 					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/shop01.jpg" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>TOP 1</h3>
-								<a href="#" class="cta-btn">Acheter Maintenant <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
+					<?php include 'include/shop.php' ?>
 					<!-- /shop -->
 
 				</div>
@@ -153,72 +135,6 @@ include "include/head.php";
 								</div>
 								<!-- /product widget -->
 
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Colonne 2 Produit 2</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Colonne 3 Produit 3</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
-							</div>
-
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
 							</div>
 						</div>
 					</div>
@@ -233,7 +149,9 @@ include "include/head.php";
 
 						<div class="products-widget-slick" data-nav="#slick-nav-4">
 							<div>
-								
+								<!-- product widget -->
+							
+								<!-- /product widget -->
 							</div>
 						</div>
 					</div>
@@ -263,72 +181,7 @@ include "include/head.php";
 								</div>
 								<!-- /product widget -->
 
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
-							</div>
-
-							<div>
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- /product widget -->
-
-								<!-- product widget -->
-								<div class="product-widget">
-									<div class="product-img">
-										<img src="../projet-site-biblio/img/product1.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Categories</p>
-										<h3 class="product-name"><a href="#">titre du livre</a></h3>
-										<h4 class="product-price">980.00 € <del class="product-old-price">990.00 €</del></h4>
-									</div>
-								</div>
-								<!-- product widget -->
+								
 							</div>
 						</div>
 					</div>
@@ -339,149 +192,12 @@ include "include/head.php";
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-
 		<!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>inscris toi pour recevoir les <strong>NOUVELLES</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Entre Ton Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Valider</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
+		<?php include 'include/newsletter.php' ?>
 		<!-- /NEWSLETTER -->
-
 		<!-- FOOTER -->
-		<footer id="footer">
-			<!-- top footer -->
-			<div class="section">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">A Propos De Nous</h3>
-								<p>Voici notres projet</p>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>59140 Dunkerque</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>03 28 29 30 31</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>projet@email.com</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
-								<ul class="footer-links">
-									<li><a href="#">Offre Du Moments</a></li>
-									<li><a href="#">Livres Neufs</a></li>
-									<li><a href="#">Livres D'occasions</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Informations</h3>
-								<ul class="footer-links">
-									<li><a href="#">A Propos</a></li>
-									<li><a href="#">Contactez Nous</a></li>
-									<li><a href="#">Police Privé</a></li>
-									<li><a href="#">Retour De Produit</a></li>
-									<li><a href="#">Conditions D'utilisation</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Services</h3>
-								<ul class="footer-links">
-                  <?php 
-                  //si session active affiché mon compte sinon connexion
-                  if(isset($_SESSION))
-                  {
-                    echo "<li><a href='account.php'>Mon Compte</a></li>";
-                  }
-                  else
-                  {
-                    echo "<li><a href='login.php'>Connexion</a></li>";
-                  }
-                  
-                  ?>
-									
-									<li><a href="#">Mon Panier</a></li>
-									<li><a href="#">Favoris</a></li>
-									<li><a href="#">Suivre Mon Colis</a></li>
-									<li><a href="#">Aide</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /top footer -->
-
-			<!-- bottom footer -->
-			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-							</ul>
-							<span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Droit Reservé | Le template a était fait par Danny, Hervé, Davy, Kévin <a href="https://colorlib.com" target="_blank"></a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
-						</div>
-					</div>
-						<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /bottom footer -->
-		</footer>
+		<?php include 'include/footer.php' ?>
 		<!-- /FOOTER -->
-
 		<!-- jQuery Plugins -->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>

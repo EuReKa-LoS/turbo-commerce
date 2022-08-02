@@ -14,7 +14,7 @@
 			<!-- product -->
 			<div class="product">
 				<div class="product-img">
-					<img src=<?php echo $donnees['imgLivre']?> alt="<?php echo $donnees['titreLivre'] ?>">
+					<img src=<?php echo $donnees['imgLivre']?> alt="<?php echo $donnees['titreLivre'] ?>" width="200" height="450">
 					<?php
 					if(isset($promo))
 					{
