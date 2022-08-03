@@ -1,6 +1,4 @@
 <?php
-include ('lib/databases.php');
-include ('lib/categories.php');
         if (isset($_POST['idLivre'])) //Formulaire de modification si l'id à été selectionner
         {
             try {
@@ -14,7 +12,7 @@ include ('lib/categories.php');
                 while ($donnees = $req->fetch()) {
                     //Une idlivre est selectionner je remplis mon tableau avec les datas associer
         ?>          
-                    <form method="post" action="index.php" class="form-books"  enctype="multipart/form-data">
+                    <form method="post" action="dashboard.php" class="form-books"  enctype="multipart/form-data">
                 <ul>
                     <h1>Modification d'un livre</h1>
                     <input type="hidden" name="idLivre" value="<?php echo $_POST['idLivre'] ?>" /></li>
@@ -32,7 +30,7 @@ include ('lib/categories.php');
                     <li><label for="descriptionLivre">Description du livre: </label><textarea id="descriptionLivre" name="descriptionLivre" rows="10px" cols="50px"><?php echo $donnees['descriptionLivre']; ?></textarea></li>
                     <li><label for="auteurLivre"></label>Auteur du livre: <input type="text" id="auteurLivre" name="auteurLivre" value="<?php echo $donnees['auteurLivre']; ?>"/></li>
                     <!-- Gestion file -->
-                    <li><label for="imgLivre">Jaquette du livre: </label> : <img src="<?php echo $donnees['imgLivre'];?>" class="img-rounded" width="80" height="120" />
+                    <li><label for="imgLivre">Jaquette du livre: </label> : <img src="<?php echo "../img/".$donnees['imgLivre'];?>" class="img-rounded" width="80" height="120" />
                                                                             <input type="file" id="imgLivreUpdated" name="imgLivreUpdated" /></li>
                     <!-- Fin gestion file -->            
                     <li><label for="stockLivre"></label>Stock du livre: <input type="text" id="stockLivre" name="stockLivre" value="<?php echo $donnees['stockLivre']; ?>"/></li>
@@ -45,7 +43,7 @@ include ('lib/categories.php');
     </ul>
     <input type="submit" name="Updating" value="Mettre à jour" />
 </form>
-<form method="post" action="index.php">
+<form method="post" action="dashboard.php">
     <input type="hidden" name="idLivre" value="<?php echo $_POST['idLivre'] ?>" /></li>
     <input type="submit" name="Deleting" value="Supprimer" />
 <?php
@@ -60,13 +58,13 @@ include ('lib/categories.php');
 else
 {
 
-//
+    require 'ajoutMoi.php';
 //Selecteur
             try {
                 require 'connect.php';
                 $reponse = $pdo->query('SELECT idLivre, titreLivre FROM livres');
 ?>
-    <form method="post" action="index.php">
+    <form method="post" action="dashboard.php">
         <p>
             <label for="idLivre">
                 <h1>Livre à modifier</h1>
@@ -94,6 +92,10 @@ else
                 die('Erreur : ' . $e->getMessage()); //Affichage Erreur
             }
         } //else
+
+
+
+
 ?>
 
 <?php
@@ -149,7 +151,8 @@ if (isset($_POST['Updating']) AND (isset($_POST['idLivre']))) {
             $imgRow=$stmt_select->fetch(PDO::FETCH_ASSOC);
             //Ici je supprime l'image dans le dossier
             // Prend directement la valeur en bdd exemple /img/eragon.jpg
-            unlink($imgRow['imgLivre']);
+            var_dump($imgRow['imgLivre']);
+            unlink("../img/".$imgRow['imgLivre']);
             //Ici je commence à upload la nouvelle image
             $stmt_select->closeCursor();
             echo "Je traite le nouvelle image";
@@ -162,8 +165,8 @@ if (isset($_POST['Updating']) AND (isset($_POST['idLivre']))) {
                 //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
                 $file = $uniqueName . "." . $extension;
                 //$file = 5f586bf96dcd38.73540086.jpg
-                move_uploaded_file($tmpName, './img/' . $file);
-                $pathImg = './img/' . $file; //Pour avoir un string /img/nomImage.jpg
+                move_uploaded_file($tmpName, '../img/' . $file);
+                $pathImg = $file; //Pour avoir un string /img/nomImage.jpg
                 require 'connect.php';
                 $pdo->exec('SET NAMES "UTF8"');
                 $sql = "UPDATE livres SET titreLivre='$titreLivre' , categorieLivre='$categorieLivre' , descriptionLivre='$descriptionLivre' , auteurLivre='$auteurLivre', imgLivre='$pathImg' , stockLivre='$stockLivre' , prixLivre='$prixLivre' , codeBarreLivre='$codeBarreLivre', ISBN='$ISBN' WHERE idLivre='$idLivre'";
@@ -191,12 +194,12 @@ else{
             $stmt_select=$pdo->prepare('SELECT * FROM livres WHERE idLivre=:idLivre');
             $stmt_select->execute(array(':idLivre'=>$_POST['idLivre']));
             $imgRow=$stmt_select->fetch(PDO::FETCH_ASSOC);
-            unlink($imgRow['imgLivre']); // Prend directement la
+            unlink("../img".$imgRow['imgLivre']); // Prend directement la
             //Supression du livre
             $idLivre = intval($_POST['idLivre']);
             $req = $pdo->prepare("DELETE FROM livres where idLivre='$idLivre'");
 			$req->execute();
-            header("Refresh:0; url=index.php");
+            header("Refresh:0; url=dashboard.php");
         }
         }
 	    catch(Exception $e)

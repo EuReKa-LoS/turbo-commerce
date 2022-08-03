@@ -4,7 +4,7 @@
 					        <div class="products-tabs">
 					            <!-- tab -->
 					            <div id="tab1" class="tab-pane active">
-					                <div class="products-slick" data-nav="#slick-nav-1">
+					                <div class="products-slick" data-nav="#slick-nav-3">
 <?php
 	//Affichage avec IMG
 		require 'connect.php';
@@ -14,9 +14,9 @@
 			<!-- product -->
 			<div class="product">
 				<div class="product-img">
-					<img src=<?php echo $donnees['imgLivre']?> alt="<?php echo $donnees['titreLivre'] ?>" width="200" height="450">
+					<img src=<?php echo "img/".$donnees['imgLivre']?> alt="<?php echo $donnees['titreLivre'] ?>" width="200" height="450">
 					<?php
-					if($hotdeal === true)
+					if($hotdeal == true)
 					{
 					?>
 					<div class="product-label">
@@ -31,18 +31,18 @@
 					<p class="product-category"><?php echo $donnees['nameCategorie'] ?></p>
 
 					<h3 class="product-name"><a href="product.php?idLivre=<?= $donnees['idLivre'] ?>"><?php echo $donnees['titreLivre'] ?></a></h3>
-					<h4 class="product-price"><?php echo $donnees['prixLivre'] ?><del class="product-old-price">990.00 €</del></h4>
-					<div class="product-rating">
+					<h4 class="product-price"><?php echo $donnees['prixLivre'] ?><!--<del class="product-old-price">990.00 €</del>--></h4>
+					<!--<div class="product-rating">
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
-					</div>
-					<div class="product-btns">
-						<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">ajouter aux favoris</span></button>
-						<!-- <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> -->
-						<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vue rapide</span></button>
+					</div>-->
+					 <div class="product-btns">
+						<!--<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">ajouter aux favoris</span></button>
+						<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> 
+						<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">vue rapide</span></button>-->
 					</div>
 				</div>
 				<div class="add-to-cart">
@@ -75,7 +75,7 @@
 		}
     ?>
 </div>
-					                <div id="slick-nav-1" class="products-slick-nav"></div>
+					                <div id="slick-nav-3" class="products-slick-nav"></div>
 					            </div>
 					            <!-- /tab -->
 					        </div>

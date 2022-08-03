@@ -8,7 +8,7 @@
 <div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
-								<img src=<?php echo $donnees['imgLivre']?> alt=<?php echo $donnees['titreLivre'] ?> width="200" height="450">
+								<img src=<?php echo "img/".$donnees['imgLivre']?> alt=<?php echo $donnees['titreLivre'] ?> width="200" height="450">
 							</div>
 							<div class="shop-body">
 								<h3><?php echo $donnees['titreLivre'] ?></h3>

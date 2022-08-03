@@ -9,7 +9,7 @@
         <div class="col-md-4 col-xs-6">
             <div class="product">
                 <div class="product-img">
-                    <img src=<?php echo $donnees['imgLivre'] ?> alt="Jaquette de <?= $donnees['titreLivre'] ?>">
+                    <img src=<?php echo "img/".$donnees['imgLivre'] ?> alt="Jaquette de <?= $donnees['titreLivre'] ?>">
                 </div>
                 <div class="product-body">
                     <p class="product-category"><?php echo $donnees['nameCategorie'] ?></p>

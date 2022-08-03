@@ -113,6 +113,8 @@ include "include/head.php";
 			<div class="container">
 				<!-- row -->
 				<div class="row">
+					<?php
+					/*
 					<div class="col-md-4 col-xs-6">
 						<div class="section-title">
 							<h4 class="title">Top ventes</h4>
@@ -186,7 +188,7 @@ include "include/head.php";
 							</div>
 						</div>
 					</div>
-
+					*/?>
 				</div>
 				<!-- /row -->
 			</div>

@@ -1,7 +1,6 @@
 
 <?php
-include ('lib/databases.php');
-include ('lib/categories.php');
+
 if (isset($_POST['books'])) {
     try {
         if (isset($_FILES['imgLivre'])) {
@@ -34,8 +33,8 @@ if (isset($_POST['books'])) {
                 //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
                 $file = $uniqueName . "." . $extension;
                 //$file = 5f586bf96dcd38.73540086.jpg
-                move_uploaded_file($tmpName, './img/' . $file);
-                $pathImg = './img/' . $file; //Pour avoir un string /img/nomImage.jpg
+                move_uploaded_file($tmpName, '../img/' . $file);
+                $pathImg =  $file; //Pour avoir un string /img/nomImage.jpg
                 require 'connect.php';
                 $sql = "INSERT INTO livres (titreLivre, categorieLivre, descriptionLivre, auteurLivre, imgLivre, etatLivre, reEditionLivre, stockLivre, prixLivre, codeBarreLivre, ISBN) 
                         VALUES (:titreLivre, :categorieLivre, :descriptionLivre, :auteurLivre, :imgLivre, :etatLivre, :reEditionLivre, :stockLivre, :prixLivre, :codeBarreLivre, :ISBN)";
@@ -76,7 +75,7 @@ $categories = get_all_categories();
 <!-- Formulaire ajout du livre -->
 <h1>Ajout de livre</h1>
 <table class="table-books">
-    <form method="post" action="index.php" class="form-books" enctype="multipart/form-data">
+    <form method="post" action="dashboard.php" class="form-books" enctype="multipart/form-data">
         <li><label for="titreLivre">Titre du livre: </label><input type="text" id="titreLivre" name="titreLivre" required="" ></li>
         <!-- </label><input type="text" id="categorieLivre" name="categorieLivre" required=""></li> -->
         <li><label for="categorieLivre">Categorie du livre: </label>
@@ -85,7 +84,8 @@ $categories = get_all_categories();
                 <option value="<?php echo $category->id ?>"><?= $category->nameCategorie ?></option>
             <?php endforeach ?>
         </select>
-        <li><label for="descriptionLivre">Description du livre: </label><textarea id="descriptionLivre" name="descriptionLivre" rows="10px" cols="50px"></textarea></li>
+        <li><label for="descriptionLivre">Description du livre:</label><li>
+        <li><textarea id="descriptionLivre" name="descriptionLivre" rows="10px" cols="50px"></textarea></li>
         <li><label for="auteurLivre"></label>Auteur du livre: <input type="text" id="auteurLivre" name="auteurLivre" required=""></li>
         <!-- Gestion file -->
         <li><label for="imgLivre">Jaquette du livre: </label> : <input type="file" id="imgLivre" name="imgLivre" required=""></li>
@@ -100,5 +100,3 @@ $categories = get_all_categories();
         <input type="submit" name="books" value="Ajouter" />
     </form class="form-books">
 </table class="table-books">
-<form method="post" action="login.php">
-</form>

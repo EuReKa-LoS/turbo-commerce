@@ -49,13 +49,13 @@ require "../include/head.php";
 
             // Si la session est déjà active
             if (
-                isset($_SESSION['email_users']) and isset($_SESSION['password_users'])
+                isset($_SESSION['prenom']) and isset($_SESSION['nom'])
+
             ) {
-                //Utilisateur déjà connecter, ne doit pas se trouvé ici.
-                header('Location: ../index.php');
-                // Les actions suivantes sont "normalement" inutile grâce au header
-                //echo "Vous êtes déjà connecter";
-                //echo "<a href=\"logout.php\">Déconnexion</a>";
+                echo "<ul><li>Vous êtes déjà connecté<P></li>";
+                echo "<Li><a href='dashboard.php'>Gestion du compte</li>";
+                echo "<li><a href='logout.php'>Déconnexion</a></li></ul>";
+
             } else {
                 //Formulaire de connexion est remplis
                 if (isset($_POST['login'])) {
@@ -66,7 +66,7 @@ require "../include/head.php";
                         //J'ai besoin de la Base de Donnée
                         require $config_bdd;
                         $stmt = $bdd->prepare("SELECT * FROM users WHERE email = ?");
-                        $email_users_post = [$_POST['email_users']];
+                        //$email_users_post = [$_POST['email_users']];
                         $stmt->execute([$_POST['email_users']]);
                         $user = $stmt->fetch(); //fetchAll(PDO::FETCH_ASSOC);//
                         //var_dump($user);
@@ -75,9 +75,11 @@ require "../include/head.php";
                             $fullname=$user['first_name']." ".$user['last_name'];;
                             $_SESSION['prenom'] = $user['first_name'];
                             $_SESSION['nom'] = $user['last_name'];
+                            $_SESSION['id_user']=$user['id_user'];
                             echo "Bonjour ".$fullname."</br>";
+                            echo "<a href='dashboard.php'>Gestion du compte</a>";
                             //Le header semble pété
-                            header('location:dashboard.php');
+                            //header('location:dashboard.php');
                         } else {
                             echo "Identifiants  Inwalid";
                         }
@@ -111,7 +113,7 @@ require "../include/head.php";
                             'role' => 0
                         ];
                         $req->execute($data);
-                        header("location:login.php");
+                        //header("location:login.php");
                     } catch (Exception $e) {
                         die('Erreur : ' . $e->getMessage());
                     }
@@ -122,14 +124,14 @@ require "../include/head.php";
                         <!-- Formulaire de connexion -->
                         <h1>Connexion</h1>
                         <table class="table-login">
-                            <form method="post" action="login.php" class="form-login">
+                            <form method="post" action="connexion.php" class="form-login">
                                 <li><label for="email_users">Email: </label> : <input type="text" id="email_users" name="email_users"></li>
                                 <li><label for="password_users">Mot de passe: </label> : <input type="password" id="password_users" name="password_users"></li>
                                 <li><label for="forget_password">Mot de passe oublier</label><input type="checkbox"></li>
                                 <input type="submit" name="login" value="Connexion" /><input type="reset" value="Effacer" />
                             </form class="form-login">
                         </table class="table-login">
-                        <form method="post" action="login.php">
+                        <form method="post" action="connexion.php">
                             <input type="submit" name="Sinscrire" value="Sinscrire">
                         </form>
                     <?php }
@@ -138,7 +140,7 @@ require "../include/head.php";
                 if (isset($_POST['Sinscrire'])) { ?>
                     <h1>Inscription</h1>
                     <table class="table-signup">
-                        <form method="post" action="login.php" class="form-login">
+                        <form method="post" action="connexion.php" class="form-login">
                             <li><label for="signup_first_name">Prénom: </label> : <input type="text" id="signup_first_name" name="signup_first_name"></li>
                             <li><label for="signup_last_name">Nom: </label> : <input type="text" id="signup_last_name" name="signup_last_name"></li>
                             <li><label for="signup_email_users">Email: </label> : <input type="text" id="signup_email_users" name="signup_email_users"></li>
@@ -158,9 +160,7 @@ require "../include/head.php";
                     </table class="table-signup">
             <?php }
             } ?>
-            <h1>Je suis là car on à besoin de moi:</1>
-                <li><a href="logout.php">Déconnexion</a></li>
-                </ul>
+            
         </div>
         <!-- /container -->
     </div>

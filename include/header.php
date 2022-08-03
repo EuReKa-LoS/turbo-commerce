@@ -18,11 +18,11 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
                         //si session active affiché mon compte sinon connexion
                         if(!empty($_SESSION))
                         {
-                          echo "<li><a href='admin/dashboard.php'><i class='fa fa-user-o'></i> Mon compte</a></li>";
+                          echo "<li><a href='/admin/dashboard.php'><i class='fa fa-user-o'></i> Mon compte</a></li>";
                         }
                         else
                         {
-                          echo "<li><a href='admin/connexion.php'><i class='fa fa-user-o'></i> Connexion</a></li>";
+                          echo "<li><a href='/admin/connexion.php'><i class='fa fa-user-o'></i> Connexion</a></li>";
                         }
 
                         ?>
@@ -51,7 +51,7 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
+								<!--<form>
 									<select class="input-select">
 										<option value="0">Choisis</option>
 										<option value="1">Category 01</option>
@@ -63,7 +63,7 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
 									</select>
 									<input class="input" placeholder="Recherche ici">
 									<button class="search-btn">Recherche</button>
-								</form>
+								</form>-->
 							</div>
 						</div>
 						<!-- /SEARCH BAR -->

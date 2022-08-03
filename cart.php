@@ -159,7 +159,7 @@ include "include/head.php";
 												<tr>
 													<td class="img">
 														<a href="product.php?idLivre=<?= $product['idLivre'] ?>">
-															<img src="../<?= $product['imgLivre'] ?>" width="45" height="85" alt="<?= $product['titreLivre'] ?>">
+															<img src="img/<?= $product['imgLivre'] ?>" width="45" height="85" alt="<?= $product['titreLivre'] ?>">
 														</a>
 													</td>
 													<td>
@@ -184,9 +184,7 @@ include "include/head.php";
 								<div class="buttons">
 									<input type="submit" value="Mettre à jour" name="update">
 									<input type="submit" value="Passer la commande" name="placeorder">
-									<div class="paypal">
-										<button type="submit" name="paypal"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" border="0" alt="PayPal Logo"></button>
-									</div>
+								
 								</div>
 							</form>
 						</div>

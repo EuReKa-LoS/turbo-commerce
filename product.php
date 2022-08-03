@@ -52,8 +52,9 @@ require "include/head.php";
 		<div id="breadcrumb" class="section">
 			<!-- container -->
 			<div class="container">
+				
 				<!-- row -->
-				<div class="row">
+				<!--<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
@@ -63,7 +64,7 @@ require "include/head.php";
 							<li class="active">Product name goes here</li>
 						</ul>
 					</div>
-				</div>
+				</div>-->
 				<!-- /row -->
 			</div>
 			<!-- /container -->
@@ -100,7 +101,7 @@ require "include/head.php";
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-							<img src="../<?=$livre['imgLivre']?>" width="300" height="500" alt="<?=$livre['titreLivre']?>">
+							<img src="img/<?=$livre['imgLivre']?>" width="300" height="500" alt="<?=$livre['titreLivre']?>">
 							</div>
 						</div>
 					</div>
@@ -118,14 +119,14 @@ require "include/head.php";
 						<div class="product-details">
 							<h2 class="product-name"><?=$livre['titreLivre']?></h2>
 							<div>
-								<div class="product-rating">
+								<!--<div class="product-rating">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
-								</div>
-								<a class="review-link" href="#">10 Review(s) | Add your review</a>
+								</div>-->
+								<!--<a class="review-link" href="#">10 Review(s) | Add your review</a>-->
 							</div>
 							<div>
 								<h3 class="product-price"><?= $livre['prixLivre']?></h3>
@@ -146,8 +147,8 @@ require "include/head.php";
 									<?php if(($livre['stockLivre'])!=0){
 									?>
 										<input type="number" name="quantity" value="1" min="1" max="<?=$livre['stockLivre']?>" placeholder="Quantity" required>
-										<span class="qty-up">+</span>
-										<span class="qty-down">-</span>
+										<!--<span class="qty-up">+</span>
+										<span class="qty-down">-</span>-->
 										<?php
 								}
 								else
@@ -176,12 +177,13 @@ require "include/head.php";
 							<p><?php echo $livre['descriptionLivre'] ?></p>
 							
 
+							<!--
 							<ul class="product-links">
 								<li>Category:</li>
 								<li><a href="#">Headphones</a></li>
 								<li><a href="#">Accessories</a></li>
 							</ul>
-								
+							-->	
 							<?php
 							/*
 							<ul class="product-links">
