@@ -12,8 +12,8 @@
                     <img src=<?php echo $donnees['imgLivre'] ?> alt="Jaquette de <?= $donnees['titreLivre'] ?>">
                 </div>
                 <div class="product-body">
-                    <p class="product-category">Categories</p>
-                    <h3 class="product-name"><a href="#"><?php echo $donnees['titreLivre'] ?></a></h3>
+                    <p class="product-category"><?php echo $donnees['nameCategorie'] ?></p>
+                    <h3 class="product-name"><a href="product.php?idLivre=<?=$donnees['idLivre']?>"><?php echo $donnees['titreLivre'] ?></a></h3>
                     <?php
                     if($promo === true)
                     {
@@ -37,7 +37,26 @@
                     </div>
                 </div>
                 <div class="add-to-cart">
-                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> ajouter au panier</button>
+                <?php
+                // Si il y a du stock on affiche juste un bouton désactiver "Indisponible"
+                if($donnees['stockLivre']==0)
+				{?>
+                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart" disabled></i> Indisponible</button>
+                <?php
+                }
+                else
+                {   
+                    // Si il y a du stock on affiche le bouton d'ajout au panier et dans la requête on envoi en quantité 1 (pré-requis)
+                    ?>
+                    <form action="cart.php?page=cart" method="post">
+                
+                    <input type="hidden" name="idLivre" value="<?=$donnees['idLivre']?>">
+                    <input type="hidden" name="quantity" value="1">
+                    <button class='add-to-cart-btn'><i class='fa fa-shopping-cart'></i> ajouter au panier</button>
+                    </form>
+                    <?php
+                }
+                ?>
                 </div>
             </div>
         </div>

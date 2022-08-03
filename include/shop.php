@@ -1,7 +1,7 @@
 <?php
 	//Affichage avec IMG
 		require 'connect.php';
-			$query = $pdo->query("SELECT * FROM livres INNER JOIN categories ON livres.categorieLivre = categories.id LIMIT 3");
+			$query = $pdo->query("SELECT * FROM livres INNER JOIN categories ON livres.categorieLivre = categories.id ORDER BY date ASC LIMIT 3 ");
 			while ($donnees = $query->fetch())
 		{
             ?>
@@ -12,7 +12,7 @@
 							</div>
 							<div class="shop-body">
 								<h3><?php echo $donnees['titreLivre'] ?></h3>
-								<a href="index.php?page=product.php&idLivre=<?=$donnees['idLivre']?>" class="cta-btn">Acheter Maintenant <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="product.php?idLivre=<?=$donnees['idLivre']?>" class="cta-btn">Acheter Maintenant <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>

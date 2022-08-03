@@ -18,11 +18,11 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
                         //si session active affiché mon compte sinon connexion
                         if(!empty($_SESSION))
                         {
-                          echo "<li><a href='admin/login.php'><i class='fa fa-user-o'></i> Mon compte</a></li>";
+                          echo "<li><a href='admin/dashboard.php'><i class='fa fa-user-o'></i> Mon compte</a></li>";
                         }
                         else
                         {
-                          echo "<li><a href='admin/login.php'><i class='fa fa-user-o'></i> Connexion</a></li>";
+                          echo "<li><a href='admin/connexion.php'><i class='fa fa-user-o'></i> Connexion</a></li>";
                         }
 
                         ?>

@@ -2,6 +2,7 @@
 // Varaible pour le menu Hot Deal
 $hotdeal=false;
 $newsletter=false;
+$promo=false;
 ?>
 <!doctype html>
 <html lang="en">

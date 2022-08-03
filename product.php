@@ -1,9 +1,23 @@
 <?php
+session_start();
 // Varaible pour le menu Hot Deal
 $hotdeal=false;
 $newsletter=false;
-if (isset($_SESSION["email"])) {
-echo $_SESSION["email"];
+require 'include/connect.php';
+if (isset($_GET['idLivre'])) {
+    // Prepare statement and execute, prevents SQL injection
+    $stmt = $pdo->prepare('SELECT * FROM livres WHERE idLivre = ?');
+    $stmt->execute([$_GET['idLivre']]);
+    // Fetch the product from the database and return the result as an Array
+    $livre = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Check if the product exists (array is not empty)
+    if (!$livre) {
+        // Simple error to display if the id for the product doesn't exists (array is empty)
+        exit('Product does not exist!');
+    }
+} else {
+    // Simple error to display if the id wasn't specified
+    exit('Product does not exist!');
 }
 ?>
 <!doctype html>
@@ -11,11 +25,11 @@ echo $_SESSION["email"];
 
 <?php
 $path="styles.css";
-include "include/head.php";
+require "include/head.php";
 ?>
 	<body>
 		<!-- HEADER -->
-		<?php include 'include/header.php' ?>
+		<?php require "include/header.php" ?>
 		<!-- /HEADER -->
 
 		<!-- NAVIGATION -->
@@ -25,7 +39,7 @@ include "include/head.php";
 				<!-- responsive-nav -->
 				<div id="responsive-nav">
 					<!-- NAV -->
-					<?php include  'include/navbar.php' ?>
+					<?php require "include/navbar.php" ?>
 					<!-- /NAV -->
 				</div>
 				<!-- /responsive-nav -->
@@ -123,17 +137,37 @@ include "include/head.php";
 								else
 								{
 									?>
-									<span class='product-available'>En stock</span>
+									<span class='product-available'>En stock (<?= $livre['stockLivre']?>)</span>
+									<form action="cart.php?page=cart" method="post">
 									<div class="add-to-cart">
 									<div class="qty-label">
 									Quantité
 									<div class="input-number">
-										<input type="number">
+									<?php if(($livre['stockLivre'])!=0){
+									?>
+										<input type="number" name="quantity" value="1" min="1" max="<?=$livre['stockLivre']?>" placeholder="Quantity" required>
 										<span class="qty-up">+</span>
 										<span class="qty-down">-</span>
+										<?php
+								}
+								else
+								{
+									?>
+									<input type="text" name="quantity" value="Indisponible" disabled>
+									<?php
+								}
+								?>
 									</div>
 								</div>
+							
+								<input type="hidden" name="idLivre" value="<?=$livre['idLivre']?>">
+								
+								
+							
+
+								
 								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								</form>
 								</div>
 								<?php
 								}
@@ -204,151 +238,15 @@ include "include/head.php";
 								<div id="tab3" class="tab-pane fade in">
 									<div class="row">
 										<!-- Rating -->
-										<div class="col-md-3">
-											<div id="rating">
-												<div class="rating-avg">
-													<span>4.5</span>
-													<div class="rating-stars">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o"></i>
-													</div>
-												</div>
-												<ul class="rating">
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</div>
-														<div class="rating-progress">
-															<div style="width: 80%;"></div>
-														</div>
-														<span class="sum">3</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div style="width: 60%;"></div>
-														</div>
-														<span class="sum">2</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div></div>
-														</div>
-														<span class="sum">0</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div></div>
-														</div>
-														<span class="sum">0</span>
-													</li>
-													<li>
-														<div class="rating-stars">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-															<i class="fa fa-star-o"></i>
-														</div>
-														<div class="rating-progress">
-															<div></div>
-														</div>
-														<span class="sum">0</span>
-													</li>
-												</ul>
-											</div>
-										</div>
+										
+										<?php require 'include/rating.php'?>
+
 										<!-- /Rating -->
 
 										<!-- Reviews -->
-										<div class="col-md-6">
-											<div id="reviews">
-												<ul class="reviews">
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-													<li>
-														<div class="review-heading">
-															<h5 class="name">John</h5>
-															<p class="date">27 DEC 2018, 8:0 PM</p>
-															<div class="review-rating">
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star"></i>
-																<i class="fa fa-star-o empty"></i>
-															</div>
-														</div>
-														<div class="review-body">
-															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-														</div>
-													</li>
-												</ul>
-												<ul class="reviews-pagination">
-													<li class="active">1</li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-												</ul>
-											</div>
-										</div>
+										
+										<?php require 'include/review.php'?>
+
 										<!-- /Reviews -->
 
 										<!-- Review Form -->
@@ -527,10 +425,10 @@ include "include/head.php";
 		<!-- /Section -->
 
 		<!-- NEWSLETTER -->
-		<?php include 'include/newsletter.php' ?>
+		<?php require "include/newsletter.php" ?>
 		<!-- /NEWSLETTER -->
 		<!-- FOOTER -->
-		<?php include 'include/footer.php' ?>
+		<?php require "include/footer.php" ?>
 		<!-- /FOOTER -->
 
 		<!-- jQuery Plugins -->

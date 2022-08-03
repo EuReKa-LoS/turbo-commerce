@@ -16,20 +16,20 @@
 				<div class="product-img">
 					<img src=<?php echo $donnees['imgLivre']?> alt="<?php echo $donnees['titreLivre'] ?>" width="200" height="450">
 					<?php
-					if(isset($promo))
+					if($hotdeal == false)
 					{
 					?>
 					<div class="product-label">
 						<span class="sale">-30%</span>
 						<span class="new">NOUVEAU</span>
 					</div>
-				<?php	
-				}
+					<?php	
+					}
 					?>
 				</div>
 				<div class="product-body">
 					<p class="product-category"><?php echo $donnees['nameCategorie'] ?></p>
-					<h3 class="product-name"><a href="#"><?php echo $donnees['titreLivre'] ?></a></h3>
+					<h3 class="product-name"><a href="product.php?idLivre=<?= $donnees['idLivre'] ?>"><?php echo $donnees['titreLivre'] ?></a></h3>
 					<h4 class="product-price"><?php echo $donnees['prixLivre'] ?><del class="product-old-price">990.00 €</del></h4>
 					<div class="product-rating">
 						<i class="fa fa-star"></i>
