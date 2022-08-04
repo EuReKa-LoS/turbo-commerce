@@ -125,9 +125,9 @@ require "../include/head.php";
                         <h1>Connexion</h1>
                         <table class="table-login">
                             <form method="post" action="connexion.php" class="form-login">
-                                <li><label for="email_users">Email: </label> : <input type="text" id="email_users" name="email_users"></li>
-                                <li><label for="password_users">Mot de passe: </label> : <input type="password" id="password_users" name="password_users"></li>
-                                <li><label for="forget_password">Mot de passe oublier</label><input type="checkbox"></li>
+                                <li><label for="email_users">Email: </label> : <input type="email" id="email_users" name="email_users" required></li>
+                                <li><label for="password_users">Mot de passe: </label> : <input type="password" id="password_users" name="password_users" required></li>
+                                <!--<li><label for="forget_password">Mot de passe oublier</label><input type="checkbox"></li>-->
                                 <input type="submit" name="login" value="Connexion" /><input type="reset" value="Effacer" />
                             </form class="form-login">
                         </table class="table-login">

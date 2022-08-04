@@ -24,10 +24,7 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
                         else
                         {
                           echo "<li><a href='/admin/connexion.php'><i class='fa fa-user-o'></i> Connexion</a></li>";
-						  /*echo "<li><form method='post' action='/admin/connexion.php'>
-                            	<input type='submit' name='Sinscrire' value='Sinscrire'>
-                        		</form></li>";
-							*/
+						  
                         }
 
                         ?>
@@ -78,8 +75,7 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
 							<div class="header-ctn">
 								<!-- Wishlist -->
 								<div>
-									<!--
-									<a href="#">
+									<!--<a href="#">
 										<i class="fa fa-heart-o"></i>
 										<span>Favoris</span>
 										
@@ -90,6 +86,28 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
+								<?php
+								// Vérification des variable de session du CART (Panier pour Hervé)
+								$products_in_cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
+								$products = array();
+								$subtotal = 0.00;
+								// Si j'ai de sproduit dans le CART (Panier pour Hervé)
+								if ($products_in_cart) {
+									// Il y a des produit dans le CART (Panier pour Hervé) alors je vais cherché les infos en base de donnée
+									// Je sais pas comment expliqué plus clairement ca=>Products in cart array to question mark string array, we need the SQL statement to include IN (?,?,?,...etc)
+									$array_to_question_marks = implode(',', array_fill(0, count($products_in_cart), '?'));
+									$stmt = $pdo->prepare('SELECT * FROM livres WHERE idLivre IN (' . $array_to_question_marks . ')');
+									// On prends les clés produit (pas les valeur), les clés sont les clés produit.
+									$stmt->execute(array_keys($products_in_cart));
+									// On chope les data de la BDD
+									$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+									// On calcule le sous-total
+									foreach ($products as $product) {
+										$subtotal += (float)$product['prixLivre'] * (int)$products_in_cart[$product['idLivre']];
+									}
+								}
+
+								?>
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
@@ -97,10 +115,16 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
 										<div class="qty"><?= $num_items_in_cart?></div>
 									</a>
 									<div class="cart-dropdown">
+									<?php if (empty($products)) : ?>
+											<tr>
+												<td colspan="5" style="text-align:center;">Aucun produit dans votre panier.</td>
+											</tr>
+										<?php else : ?>
+											<?php foreach ($products as $product) : ?>
 										<div class="cart-list">
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="../projet-site-biblio/img/product1.png" alt="">
+												<img src="img/<?= $product['imgLivre'] ?>" width="45" height="85" alt="<?= $product['titreLivre'] ?>">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">titre du livre</a></h3>
@@ -108,17 +132,9 @@ $num_fav = isset($_SESSION['fav']) ? count($_SESSION['fav']):0;
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
 											</div>
+											<?php endforeach; ?>
+										<?php endif; ?>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="../projet-site-biblio/img/product2.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">titre du livre</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>980.00 €</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
 										</div>
 										<div class="cart-summary">
 											<small>3 Objet(s) selectionner</small>
