@@ -37,9 +37,9 @@ require "../include/head.php";
             <p><?php echo "Bonjour ".$_SESSION['prenom'] ?></p>
             <!-- Vérification si l'utilisateur est Admin via l'id :) -->
             <?php
-            $config_bdd = "../SQL/connectionBDD.php";
+            $config_bdd = "../include/connect.php";
             require $config_bdd;
-            $checkRole = $bdd->prepare("SELECT * FROM users WHERE id_user = ?");
+            $checkRole = $pdo->prepare("SELECT * FROM users WHERE id_user = ?");
             $checkRole->execute([$_SESSION['id_user']]);
             $user = $checkRole->fetch(); //fetchAll(PDO::FETCH_ASSOC);//
             if($user['role']==1)

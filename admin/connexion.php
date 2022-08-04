@@ -34,7 +34,7 @@ require "../include/head.php";
         <!-- container -->
         <div class="container">
             <?php
-            $config_bdd = "../SQL/connectionBDD.php";
+            $config_bdd = "../include/connect.php";
             //Programme des festivité:
             // Si $_Session est set
             //Ne rien faire ->redirection ../index.php (la personne n'as rien à faire là)
@@ -65,7 +65,7 @@ require "../include/head.php";
                     } else {
                         //J'ai besoin de la Base de Donnée
                         require $config_bdd;
-                        $stmt = $bdd->prepare("SELECT * FROM users WHERE email = ?");
+                        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
                         //$email_users_post = [$_POST['email_users']];
                         $stmt->execute([$_POST['email_users']]);
                         $user = $stmt->fetch(); //fetchAll(PDO::FETCH_ASSOC);//
@@ -103,7 +103,7 @@ require "../include/head.php";
                                 address
                                 role 
                                 */
-                        $req = $bdd->prepare('INSERT INTO users (first_name , last_name, email, password, gender, role ) VALUES (:first_name, :last_name, :email, :password_hash, :gender, :role)');
+                        $req = $pdo->prepare('INSERT INTO users (first_name , last_name, email, password, gender, role ) VALUES (:first_name, :last_name, :email, :password_hash, :gender, :role)');
                         $data = [
                             'first_name' => $_POST['signup_first_name'],
                             'last_name' => $_POST['signup_last_name'],
