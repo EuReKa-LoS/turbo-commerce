@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 03 août 2022 à 15:34
+-- Généré le : jeu. 04 août 2022 à 05:58
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -125,16 +125,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` int(11) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=1009 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=1015 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id_user`, `first_name`, `last_name`, `email`, `password`, `gender`, `address`, `role`) VALUES
-(1002, 'Prénom Admin', 'Nom Admin', 'admin', '$2y$10$4ZuZ.Y2QABDJY3dYUdanhuNWOg4GPAazxyiFhgooshOozeJOSCdGW', 'Administrateur', NULL, 1),
-(1005, 'administrator', 'administrator', 'administrator', '$2y$10$kVmd79p3cBcnH/20Rf/0B.2usQsXppFE.paJvezGtAcvjbfI.jmKS', 'administrator', NULL, 1),
-(1008, 'Bob', 'bob', 'bob', '$2y$10$By4KrBCH05xP0UwvwQt1ye/aXLSEWpdAxaffDDKNgCu64y.4gLv16', 'lol', NULL, 0);
+(1011, 'bob', 'bob', 'bob@example.com', '$2y$10$Z7pQNu3/a5bmkMpQtXD6Qe8TXceN.Y/UTGs2DZ5iK1MIgkMcaMKh6', '', NULL, 0),
+(1005, 'Hervé', 'El Administrator', 'admin', '$2y$10$kVmd79p3cBcnH/20Rf/0B.2usQsXppFE.paJvezGtAcvjbfI.jmKS', 'administrator', NULL, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

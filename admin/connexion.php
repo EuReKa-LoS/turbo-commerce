@@ -140,10 +140,10 @@ require "../include/head.php";
                 if (isset($_POST['Sinscrire'])) { ?>
                     <h1>Inscription</h1>
                     <table class="table-signup">
-                        <form method="post" action="connexion.php" class="form-login">
-                            <li><label for="signup_first_name">Prénom: </label> : <input type="text" id="signup_first_name" name="signup_first_name"></li>
-                            <li><label for="signup_last_name">Nom: </label> : <input type="text" id="signup_last_name" name="signup_last_name"></li>
-                            <li><label for="signup_email_users">Email: </label> : <input type="text" id="signup_email_users" name="signup_email_users"></li>
+                        <form method="post" action="ajoutUtilisateur.php" class="form-login">
+                            <li><label for="signup_first_name">Prénom: </label> : <input type="text" id="signup_first_name" name="signup_first_name" required></li>
+                            <li><label for="signup_last_name">Nom: </label> : <input type="text" id="signup_last_name" name="signup_last_name" required></li>
+                            <li><label for="signup_email_users">Email: </label> : <input type="email" id="signup_email_users" name="signup_email_users" size="30" required></li>
                             <li><label for="signup_gender ">Sexe: </label> : <input type="text" id="signup_gender " name="signup_gender"></li>
                             <?php /*
                                 Masculin
@@ -153,8 +153,8 @@ require "../include/head.php";
                                 Genderqueer
                                 Je refuse de répondre
                                 */ ?>
-                            <li><label for="signup_password_users">Mot de passe: </label> : <input type="password" id="signup_password_users" name="signup_password_users"></li>
-                            <li><label for="signup_confirm_password_users">Confirmer le mot de passe: </label> : <input type="password" id="confirm_password_users" name="confirm_password_users"></li>
+                            <li><label for="signup_password_users">Mot de passe: </label> : <input type="password" id="signup_password_users" name="signup_password_users"required></li>
+                            <li><label for="signup_confirm_password_users">Confirmer le mot de passe: </label> : <input type="password" id="confirm_password_users" name="confirm_password_users"required></li>
                             <input type="submit" name="signup" value="Inscription" /><input type="reset" value="Effacer" />
                         </form class="form-signup">
                     </table class="table-signup">
