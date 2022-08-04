@@ -48,8 +48,24 @@
                     <div class="footer">
                         <h3 class="footer-title">Services</h3>
                         <ul class="footer-links">
+                        <?php 
+                        //si session active affiché mon compte sinon connexion
+                        if (isset($_SESSION['prenom']) and isset($_SESSION['nom']))
+                        {
+                          echo "<li><a href='/admin/dashboard.php'>Mon compte</a></li>";
+						  echo "<li><a href='/admin/logout.php'>Déconnexion</a></li></ul>";
+                        }
+                        else
+                        {
+                          echo "<li><a href='/admin/connexion.php'><i class='fa fa-user-o'></i> Connexion</a></li>";
+						  
+                        }
+
+                        ?>
                             <li><a href='account.php'>Mon Compte</a></li>
                             <li><a href="#">Mon Panier</a></li>
+
+                            
                             <li><a href="#">Favoris</a></li>
                             <li><a href="#">Suivre Mon Colis</a></li>
                             <li><a href="#">Aide</a></li>
